@@ -24,7 +24,7 @@ let mk_verbose_expect_test (f : unit -> 'a) (expected : 'a) (to_string : 'a -> s
     Verbose_Test(name, t_test)
 
 (* Runs a single test *)
-let run_test  (t_test : test) : (bool * string) = 
+let exec_test  (t_test : test) : (bool * string) = 
     match t_test with 
         | Test(name, exec) ->
             let result = (exec ()) in 
@@ -47,7 +47,7 @@ let run_test_set (tests : test list) (set_name : string) : unit =
         match tests with 
             | []             -> pass
             | t_test :: rest -> 
-                let (result, message) = (run_test t_test) in 
+                let (result, message) = (exec_test t_test) in 
                 let _ = print_string message in 
                 (run_tests_h rest (pass && result))
     in
@@ -59,13 +59,15 @@ let run_test_set (tests : test list) (set_name : string) : unit =
 let run_tests (tests : test list) : unit = 
     (run_test_set tests "Tests") 
             
-(* Runs a single expect test (making it from the params *)
-let run_expect_test  (f : unit -> 'a) (expected : 'a) (name : string) =
-    run_test ( mk_expect_test f expected name )
+(* Runs a single expect test (making it from the params) *)
+let run_expect_test  (f : unit -> 'a) (expected : 'a) (name : string) : unit=
+    let (result, message) = exec_test ( mk_expect_test f expected name ) in
+    print_string message
 
 (* Makes and runs a single verbose expect test *)
 let run_verbose_expect_test (f : unit -> 'a) (expected : 'a) (to_string : 'a -> string) (name : string) = 
-    run_test ( mk_verbose_expect_test f expected to_string name )
+    let (result, message) = exec_test ( mk_verbose_expect_test f expected to_string name )
+    print_string message
 
 let test_stub = Test("Implemented", (fun () -> false)  )
 ;;
