@@ -1,3 +1,4 @@
+open Pretty_print
 open Test_framework
 
 (* Type Constructor Tests *)
@@ -13,6 +14,8 @@ let test_6 = mk_expect_test (fun () -> 1) 2 "Test 6: Int !=";;
 
 let test_7 = mk_verbose_expect_test (fun () -> 1) 1 string_of_int "Verbose Test 7: Int =";;
 let test_8 = mk_verbose_expect_test (fun () -> 1) 2 string_of_int "Verbose Test 8: Int !=";;
+
+print_formatted_string "\nExamples\n\n" Blink Cyan;;
 
 (* Test Runners *)
 run_expect_test (fun () -> 3) 3 "Run Test 1: Int =";;
