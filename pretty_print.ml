@@ -8,13 +8,13 @@ type format = Reset     |
               Hidden    
 
 type color = Black   |
-			 Red     |
-			 Green   |
-			 Yellow  |
-			 Blue    |
-			 Magenta |
-			 Cyan    |
-			 White   
+             Red     |
+             Green   |
+             Yellow  |
+             Blue    |
+             Magenta |
+             Cyan    |
+             White   
 
 let format_RESET     =  0
 let format_BRIGHT    =  1
