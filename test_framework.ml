@@ -66,7 +66,7 @@ let run_expect_test  (f : unit -> 'a) (expected : 'a) (name : string) : unit=
 
 (* Makes and runs a single verbose expect test *)
 let run_verbose_expect_test (f : unit -> 'a) (expected : 'a) (to_string : 'a -> string) (name : string) = 
-    let (result, message) = exec_test ( mk_verbose_expect_test f expected to_string name )
+    let (result, message) = exec_test ( mk_verbose_expect_test f expected to_string name ) in
     print_string message
 
 let test_stub = Test("Implemented", (fun () -> false)  )
