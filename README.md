@@ -7,10 +7,10 @@ CamelJockey is a lightweight unit testing framework for OCAML. It provides some 
 
 CamelJockey will get your testing off the ground, without bringing too much bloat or confusion. As your project grows, it's easy to build off of CamelJockey, enabling more complex conditional testing. 
 
-Usage
------
+Examples
+--------
+For some examples, see test/examples.ml
 
-TODO...
-
+---
 
 (C) Anand Gupta, 2011
