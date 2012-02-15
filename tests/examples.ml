@@ -22,8 +22,8 @@ let test_gt         = mk_greater_than_test (fun () -> 1) 0 false "Greater than t
 let test_gtinc      = mk_greater_than_test (fun () -> 2) 1 true  "Greater than inclusive test";;
 let test_lt         = mk_less_than_test    (fun () -> 3) 4 false "Less than test";;
 let test_ltinc      = mk_less_than_test    (fun () -> 4) 4 true  "Less than inclusive test";;
-let test_bounded    = mk_bounded_test      (fun () -> 5) 4 false 5 false "Bounded test";;
-let test_boundedinc = mk_bounded_test      (fun () -> 6) 5 false 6 false "Bounded inclusive test";;
+let test_bounded    = mk_bounded_test      (fun () -> 5) 4 false 6 false "Bounded test";;
+let test_boundedinc = mk_bounded_test      (fun () -> 6) 5 true 6 true "Bounded inclusive test";;
 
 (* These helper functions construct verbose tests that 
 	compare a function's result to an expected value, 
