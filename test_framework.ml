@@ -9,19 +9,37 @@ let mk_expect_test (f : unit -> 'a) (expected : 'a) (name : string) : test =
     Test(name, t_test)
 
 (* Makes a test that checks if an output value is within a particular range (inclusive) *)
-let mk_bounded_test (f : unit -> 'a) (lower_bound: 'a) (upper_bound: 'a) (name : string) : test = 
-    let t_test = fun () -> (((f ()) >= lower_bound) && ((f ()) <= upper_bound)) in
+let mk_bounded_test (f   : unit -> 'a) 
+                    (lower_bound : 'a) 
+                    (upper_inc : bool) 
+                    (upper_bound : 'a) 
+                    (lower_inc : bool) 
+                    (name    : string) : test = 
+    let t_test = 
+        fun () -> 
+            (if upper_inc then ((f ()) >= lower_bound) 
+                          else (((f ()) > lower_bound))) 
+            &&
+            (if lower_inc then ((f ()) <= upper_bound)
+                          else ((f ()) < upper_bound)) in
+    Test(name, t_test)
+
+let mk_compare_test (f : unit -> 'a) (comparator : 'a -> 'a -> bool) (target: 'a) (name : string) : test = 
+    let t_test = 
+        fun () -> 
+            (comparator (f ()) target)
+    in
     Test(name, t_test)
 
 (* Makes a test that checks if an output value is greater than or equal to a certain value (inclusive) *)
-let mk_greater_than_test (f : unit -> 'a) (floor: 'a) (name : string) : test = 
-    let t_test = fun () -> ((f ()) >= floor) in
-    Test(name, t_test)
+let mk_greater_than_test (f : unit -> 'a) (floor : 'a) (inclusive : bool) (name : string) : test = 
+    let op = (if inclusive then (>=) else (>)) in
+    mk_compare_test f op floor name
 
 (* Makes a test that checks if an output value is less than or equal to a certain value (inclusive) *)
-let mk_less_than_test (f : unit -> 'a) (ceiling: 'a) (name : string) : test = 
-    let t_test = fun () -> ((f ()) <= ceiling) in
-    Test(name, t_test)
+let mk_less_than_test (f : unit -> 'a) (ceiling : 'a) (inclusive : bool) (name : string) : test = 
+    let op = (if inclusive then (<=) else (<)) in
+    mk_compare_test f op floor name
 
 (* Makes a test that expects a particular value from f, and prints differences
  * it fails to match that value *)
