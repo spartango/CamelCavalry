@@ -59,6 +59,24 @@ let mk_less_than_test (f : unit -> 'a) (ceiling : 'a) (inclusive : bool) (name :
     let op = (if inclusive then (<=) else (<)) in
     mk_compare_test f op ceiling name
 
+(* Makes a test that checks if an output value is greater than or equal to a certain value (inclusive) *)
+let mk_verbose_greater_than_test (f : unit -> 'a) 
+                                 (floor : 'a) 
+                                 (inclusive : bool)  
+                                 (to_string : 'a -> string) 
+                                 (name : string) : test = 
+    let op = (if inclusive then (>=) else (>)) in
+    mk_verbose_compare_test f op floor to_string name
+
+(* Makes a test that checks if an output value is less than or equal to a certain value (inclusive) *)
+let mk_verbose_less_than_test (f : unit -> 'a) 
+                              (ceiling : 'a) 
+                              (inclusive : bool) 
+                              (to_string : 'a -> string) 
+                              (name : string) : test = 
+    let op = (if inclusive then (<=) else (<)) in
+    mk_verbose_compare_test f op ceiling to_string name
+
 (* Makes a test that expects a particular value from f, and prints differences
  * it fails to match that value *)
 let mk_verbose_expect_test (f : unit -> 'a) (expected : 'a) (to_string : 'a -> string) (name : string) : test = 
