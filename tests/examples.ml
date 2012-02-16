@@ -25,6 +25,12 @@ let test_ltinc      = mk_less_than_test    (fun () -> 4) 4 true  "Less than incl
 let test_bounded    = mk_bounded_test      (fun () -> 5) 4 false 6 false "Bounded test";;
 let test_boundedinc = mk_bounded_test      (fun () -> 6) 5 true 6 true "Bounded inclusive test";;
 
+let test_vb_gt      = mk_verbose_greater_than_test (fun () -> 1) 0 false string_of_int "Greater than test";;
+let test_vb_gtinc   = mk_verbose_greater_than_test (fun () -> 2) 1 true  string_of_int "Greater than inclusive test";;
+let test_vb_lt      = mk_verbose_less_than_test    (fun () -> 3) 4 false string_of_int "Less than test";;
+let test_vb_ltinc   = mk_verbose_less_than_test    (fun () -> 4) 4 true  string_of_int "Less than inclusive test";;
+
+
 (* These helper functions construct verbose tests that 
 	compare a function's result to an expected value, 
   reporting the comparsion between the two *)
@@ -51,5 +57,7 @@ run_verbose_expect_test (fun () -> 3) 4 string_of_int "Run Verbose Test 4: Int !
 run_test_set [ test_1; test_2; test_3; test_4; ] "Constructor Tests";;
 
 run_test_set [ test_gt; test_gtinc; test_lt; test_ltinc; test_bounded; test_boundedinc; ] "Comparsion tests";;
+
+run_test_set [ test_vb_gt; test_vb_gtinc; test_vb_lt; test_vb_ltinc; ] "Verbose Comparsion tests";;
 
 run_test_set [ test_5; test_6; test_7; test_8; ] "Builder Tests";;
