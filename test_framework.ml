@@ -24,7 +24,7 @@ let mk_bounded_test (f   : unit -> 'a)
                           else ((f ()) < upper_bound)) in
     Test(name, t_test)
 
-let mk_vebose_compare_test (f : unit -> 'a) 
+let mk_verbose_compare_test (f : unit -> 'a) 
                            (comparator : 'a -> 'a -> bool) 
                            (target: 'a) 
                            (to_string : 'a -> string) 
