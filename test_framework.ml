@@ -80,7 +80,7 @@ let mk_verbose_less_than_test (f : unit -> 'a)
 (* Makes a test that expects a particular value from f, and prints differences
  * it fails to match that value *)
 let mk_verbose_expect_test (f : unit -> 'a) (expected : 'a) (to_string : 'a -> string) (name : string) : test = 
-    mk_vebose_compare_test f (=) expected to_string name
+    mk_verbose_compare_test f (=) expected to_string name
 
 (* Runs a single test *)
 let run_test  (t_test : test) : (bool * string) = 
