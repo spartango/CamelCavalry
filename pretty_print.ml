@@ -24,6 +24,11 @@ let format_BLINK     =  4
 let format_REVERSE   =  7
 let format_HIDDEN    =  8
 
+let control_clearrest = "\033[K"
+let control_clearline = "\033[2K"
+let control_newline   = "\n"
+let control_return    = "\r"
+
 let color_BLACK     =  30
 let color_RED       =  31
 let color_GREEN     =  32
@@ -60,5 +65,11 @@ let format_string target t_format t_color : string =
     (*'\x1b\x5bATTR;COLOR;40m\tTARGET\n' *)
     "\x1b\x5b"^(string_of_int s_format)^";"^(string_of_int s_color)^"m"^target^default_format
     
-let print_formatted_string target t_format t_color : unit= 
+let print_formatted_string target t_format t_color : unit = 
     print_string (format_string target t_format t_color)
+
+let print_line (target : string) : unit = 
+    print_string (target^control_newline)
+
+let print_clearline (target : string) : unit = 
+    print_string (control_clearline^target)
