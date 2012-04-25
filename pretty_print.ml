@@ -72,4 +72,4 @@ let print_line (target : string) : unit =
     print_string (target^control_newline)
 
 let print_clearline (target : string) : unit = 
-    print_string (control_clearline^target)
+    print_string (control_clearline^target^control_return)
